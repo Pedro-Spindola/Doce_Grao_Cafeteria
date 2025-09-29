@@ -1,0 +1,29 @@
+Cafes
+Americano - 5.00
+Café Filtrado - 7.00
+Cappuccino - 14.00
+Cold Brew - 15.00
+Espresso - 4.00
+Flat White - 14.00
+Latte - 8.00
+Macchiato - 11.00
+Mocha - 16.00
+
+Adicionais Cafe
+Acucar - 0.00
+Amendoim - 5.00
+Cacau Em Po - 1.00 
+Calda de Avela - 3.00 
+Calda de Baunilha - 3.00
+Calda de Caramelo - 3.00
+Canela em Po - 1.00
+Calda Chocolate - 3.00
+Calda Chocolate Branco - 4.00
+Chantilly - 4.00
+Doce Leite - 5.00
+Dose Cafeina - 2.00
+Leite - 2.00
+Oreo - 6.00
+Ovomaltine - 5.00
+Pistache - 7.00
+Raspas Chocolate - 3.00
