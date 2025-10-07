@@ -20,4 +20,23 @@ public class PedidoMapper {
         return null;
     }
 
+    /*
+    private String senha;
+    private StatusPedido status;
+    private PagamentoModel pagamento;
+    private LocalDateTime dataHora;
+    private List<ItemPedidoModel> itens;
+
+
+    private LocalDateTime dataHora;
+    @Column(unique = true, nullable = false)
+    private String senha; 
+    @Enumerated(EnumType.STRING)
+    private StatusPedido status;
+    @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private PagamentoPersistence pagamento;
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemPedidoPersistence> itens;
+     */
+
 }

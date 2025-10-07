@@ -7,4 +7,5 @@ public interface IProduto {
     String getNome();
     List<IAdicionais> getItemAdicional();
     BigDecimal getValor();
+    void novoAdicional(IAdicionais adicional);
 }

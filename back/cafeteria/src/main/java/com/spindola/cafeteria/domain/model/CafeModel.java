@@ -52,4 +52,10 @@ public class CafeModel implements IProduto {
         this.itemAdicional = itemAdicional;
     }
 
+    @Override
+    public void novoAdicional(IAdicionais adicional){
+        itemAdicional.add(adicional);
+    }
+    
+
 }

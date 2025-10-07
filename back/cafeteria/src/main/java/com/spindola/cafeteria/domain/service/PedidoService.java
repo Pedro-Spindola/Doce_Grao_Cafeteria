@@ -11,11 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spindola.cafeteria.application.mapper.CafeMapper;
-import com.spindola.cafeteria.domain.factory.t3;
+import com.spindola.cafeteria.domain.factory.FabricaDeAdicional;
 import com.spindola.cafeteria.domain.factory.FabricaDeCafe;
 import com.spindola.cafeteria.domain.model.AdicionalModel;
 import com.spindola.cafeteria.domain.model.ItemPedidoModel;
-import com.spindola.cafeteria.domain.model.Pagamento;
 import com.spindola.cafeteria.domain.model.PagamentoModel;
 import com.spindola.cafeteria.domain.model.PedidoModel;
 import com.spindola.cafeteria.domain.model.enums.StatusPagamento;
@@ -48,7 +47,7 @@ public class PedidoService {
     FabricaDeCafe fabricaCafe;
 
     @Autowired
-    t3 fabricaAdicional;
+    FabricaDeAdicional fabricaAdicional;
 
     @Autowired
     CafeMapper cafeMapper;
@@ -64,11 +63,11 @@ public class PedidoService {
         for (ItemPedidoRequestDTO listPedidoRequestDTO : pedidoRequestDTO.items()) {
             ItemPedidoModel itemPedido = new ItemPedidoModel();
             CafePersistence cafePersistence = cafeRepository.findById(listPedidoRequestDTO.idCafe()).get();
-            itemPedido.setCafeBase(fabricaCafe.criarCafe(cafePersistence.getNome(), cafePersistence.getValor().doubleValue()));
+            itemPedido.setCafeBase(fabricaCafe.criarCafe(cafePersistence.getNome(), cafePersistence.getValor()));
 
             for (Long k : listPedidoRequestDTO.idsAdicionais()) {
                 AdicionalPersistence adicionalPersistence = adicionalRepository.findById(k).get();
-                itemPedido.setCafeBase(fabricaAdicional.criarAdicional(itemPedido.getCafeBase(), adicionalPersistence.getNome(),  adicionalPersistence.getValor().doubleValue()));
+                itemPedido.getCafeBase().novoAdicional(fabricaAdicional.criarAdicional(adicionalPersistence.getNome(),  adicionalPersistence.getValor()));
             }
             novaListitemPedido.add(itemPedido);
         }
@@ -77,9 +76,10 @@ public class PedidoService {
         novoPedido.setSenha("A-77");
         novoPedido.setDataHora(LocalDateTime.now());
 
-        // MAPPER
+        // MAPPER tem que corrigir aqui.
+        //PedidoPersistence pedidoPersistence = null;
 
-        pedidoRepository.save(novoPedido);
+        pedidoRepository.save(pedidoPersistence);
 
         return null;
     }
