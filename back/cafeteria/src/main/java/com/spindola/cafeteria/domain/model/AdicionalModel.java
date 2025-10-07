@@ -1,17 +1,22 @@
 package com.spindola.cafeteria.domain.model;
 
-public class AdicionalModel {
+import java.math.BigDecimal;
+
+import com.spindola.cafeteria.domain.model.interfaces.IAdicionais;
+
+public class AdicionalModel implements IAdicionais {
     private Long id;
     private String nome;
-    private double valor;
+    private BigDecimal valor;
 
     public AdicionalModel() {}
     
-    public AdicionalModel(String nome, double valor) {
+    public AdicionalModel(String nome, BigDecimal valor) {
         this.nome = nome;
         this.valor = valor;
     }
 
+    @Override
     public String getNome() {
         return nome;
     }
@@ -20,11 +25,12 @@ public class AdicionalModel {
         this.nome = nome;
     }
 
-    public double getValor() {
+    @Override
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 

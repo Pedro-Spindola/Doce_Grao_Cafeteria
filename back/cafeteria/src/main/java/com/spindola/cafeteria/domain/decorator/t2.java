@@ -6,11 +6,11 @@ import java.util.List;
 import com.spindola.cafeteria.domain.model.AdicionalModel;
 import com.spindola.cafeteria.domain.model.interfaces.IProduto;
 
-public class AdicionalCafe extends Adicional {
+public class t2 extends t1 {
     private String nome;
     private double valor;
 
-    public AdicionalCafe(IProduto produto, String nome, double valor) {
+    public t2(IProduto produto, String nome, double valor) {
         super(produto);
         this.nome = nome;
         this.valor = valor;

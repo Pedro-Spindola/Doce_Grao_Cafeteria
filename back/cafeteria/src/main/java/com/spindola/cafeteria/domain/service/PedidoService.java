@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spindola.cafeteria.application.mapper.CafeMapper;
-import com.spindola.cafeteria.domain.factory.FabricaAdicional;
-import com.spindola.cafeteria.domain.factory.FabricaCafe;
+import com.spindola.cafeteria.domain.factory.t3;
+import com.spindola.cafeteria.domain.factory.FabricaDeCafe;
 import com.spindola.cafeteria.domain.model.AdicionalModel;
 import com.spindola.cafeteria.domain.model.ItemPedidoModel;
 import com.spindola.cafeteria.domain.model.Pagamento;
@@ -45,10 +45,10 @@ public class PedidoService {
     ItemAdicionalRepository adicionalRepository;
 
     @Autowired
-    FabricaCafe fabricaCafe;
+    FabricaDeCafe fabricaCafe;
 
     @Autowired
-    FabricaAdicional fabricaAdicional;
+    t3 fabricaAdicional;
 
     @Autowired
     CafeMapper cafeMapper;

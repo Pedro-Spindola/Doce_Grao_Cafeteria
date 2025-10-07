@@ -5,10 +5,10 @@ import java.util.List;
 import com.spindola.cafeteria.domain.model.AdicionalModel;
 import com.spindola.cafeteria.domain.model.interfaces.IProduto;
 
-public abstract class Adicional implements IProduto {
+public abstract class t1 implements IProduto {
     protected IProduto produto;
 
-    public Adicional(IProduto produto){
+    public t1(IProduto produto){
        this.produto = produto;
     }
 
