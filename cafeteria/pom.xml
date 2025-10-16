@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.spindola</groupId>
 	<artifactId>cafeteria</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>cafeteria</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Objetivo do projeto, desenvolver um software para uma cafeteria.</description>
 	<url/>
 	<licenses>
 		<license/>
