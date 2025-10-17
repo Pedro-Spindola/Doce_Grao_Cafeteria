@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.spindola</groupId>
 	<artifactId>cafeteria</artifactId>
-	<version>0.1.1-SNAPSHOT</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>cafeteria</name>
 	<description>Objetivo do projeto, desenvolver um software para uma cafeteria.</description>
 	<url/>

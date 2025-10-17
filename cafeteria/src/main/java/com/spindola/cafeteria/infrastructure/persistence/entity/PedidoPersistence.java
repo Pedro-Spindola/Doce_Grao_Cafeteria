@@ -20,7 +20,7 @@ public class PedidoPersistence {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String senha;
     @OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private PagamentoPersistence pagamento;

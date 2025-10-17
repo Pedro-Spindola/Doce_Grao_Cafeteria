@@ -21,14 +21,17 @@ public class CafePersistence {
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
+    private String descricao;
+    @Column(nullable = false)
     private BigDecimal valor;
     @OneToMany(mappedBy = "cafePedido", fetch = FetchType.LAZY) 
     private List<ItemPedidoPersistence> itensPedidos;
 
     public CafePersistence(){}
 
-    public CafePersistence(String nome, BigDecimal valor) {
+    public CafePersistence(String nome, String descricao, BigDecimal valor) {
         this.nome = nome;
+        this.descricao = descricao;
         this.valor = valor;
     }
 
@@ -48,6 +51,14 @@ public class CafePersistence {
         this.nome = nome;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public BigDecimal getValor() {
         return valor;
     }
@@ -62,5 +73,5 @@ public class CafePersistence {
 
     public void setItensPedidos(List<ItemPedidoPersistence> itensPedidos) {
         this.itensPedidos = itensPedidos;
-    }
+    }    
 }

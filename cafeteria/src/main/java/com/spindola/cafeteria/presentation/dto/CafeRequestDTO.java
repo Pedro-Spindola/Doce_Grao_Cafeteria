@@ -5,5 +5,6 @@ import java.math.BigDecimal;
 public record CafeRequestDTO(
     Long id,
     String nome,
+    String descrica,
     BigDecimal valor
 ) {}

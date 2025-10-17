@@ -14,6 +14,7 @@ public class CafeMapper {
         return new CafeResponseDTO(
             cafePersistence.getId(),
             cafePersistence.getNome(),
+            cafePersistence.getDescricao(),
             cafePersistence.getValor()
         );
     }
@@ -22,6 +23,7 @@ public class CafeMapper {
         return new CafeResponseDTO(
             cafeModel.getId(),
             cafeModel.getNome(),
+            cafeModel.getDescricao(),
             cafeModel.getValor()
         );
     }
@@ -30,6 +32,7 @@ public class CafeMapper {
         CafePersistence cafePersistence = new CafePersistence();
         cafePersistence.setId(dto.id());
         cafePersistence.setNome(dto.nome());
+        cafePersistence.setDescricao(dto.descrica());
         cafePersistence.setValor(dto.valor());
         return cafePersistence;
     }
@@ -38,6 +41,7 @@ public class CafeMapper {
         CafePersistence cafePersistence = new CafePersistence();
         cafePersistence.setId(cafeModel.getId());
         cafePersistence.setNome(cafeModel.getNome());
+        cafePersistence.setDescricao(cafeModel.getDescricao());
         cafePersistence.setValor(cafeModel.getValor());
         return cafePersistence;
     }
@@ -46,6 +50,7 @@ public class CafeMapper {
         CafeModel cafeModel = new CafeModel();
         cafeModel.setId(dto.id());
         cafeModel.setNome(dto.nome());
+        cafeModel.setDescricao(dto.descrica());
         cafeModel.setValor(dto.valor());
         return cafeModel;
     }
@@ -54,6 +59,7 @@ public class CafeMapper {
         CafeModel cafeModel = new CafeModel();
         cafeModel.setId(cafePersistence.getId());
         cafeModel.setNome(cafePersistence.getNome());
+        cafeModel.setDescricao(cafePersistence.getDescricao());
         cafeModel.setValor(cafePersistence.getValor());
         return cafeModel;
     }

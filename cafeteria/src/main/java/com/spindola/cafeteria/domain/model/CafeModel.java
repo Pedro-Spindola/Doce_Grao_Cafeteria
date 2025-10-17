@@ -7,13 +7,15 @@ import com.spindola.cafeteria.domain.model.interfaces.IProduto;
 public class CafeModel implements IProduto {
     private Long id;
     private String nome;
+    private String descricao;
     private BigDecimal valor;
 
     public CafeModel() {
     }
 
-    public CafeModel(String nome, BigDecimal valor) {
+    public CafeModel(String nome, String descricao, BigDecimal valor) {
         this.nome = nome;
+        this.descricao = descricao;
         this.valor = valor;
     }
 
@@ -31,6 +33,14 @@ public class CafeModel implements IProduto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public BigDecimal getValor() {

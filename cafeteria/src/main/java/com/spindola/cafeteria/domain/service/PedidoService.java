@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.spindola.cafeteria.application.mapper.CafeMapper;
 import com.spindola.cafeteria.application.mapper.ItemPedidoMapper;
+import com.spindola.cafeteria.application.mapper.PagamentoMapper;
 import com.spindola.cafeteria.application.mapper.PedidoMapper;
+import com.spindola.cafeteria.domain.exceptions.CampoObrigatorioNuloException;
+import com.spindola.cafeteria.domain.exceptions.ProdutoNaoEncontradoException;
 import com.spindola.cafeteria.infrastructure.persistence.entity.CafePersistence;
 import com.spindola.cafeteria.infrastructure.persistence.entity.ItemPedidoPersistence;
 import com.spindola.cafeteria.infrastructure.persistence.entity.PagamentoPersistence;
@@ -19,6 +22,7 @@ import com.spindola.cafeteria.infrastructure.persistence.repository.PedidoReposi
 import com.spindola.cafeteria.presentation.dto.CafeResponseDTO;
 import com.spindola.cafeteria.presentation.dto.ItemPedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.ItemPedidoResponseDTO;
+import com.spindola.cafeteria.presentation.dto.PagamentoResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoResponseDTO;
 
@@ -40,25 +44,36 @@ public class PedidoService {
     @Autowired
     CafeMapper cafeMapper;
 
+    @Autowired
+    PagamentoMapper pagamentoMapper;
+
+    @Autowired
+    GeradorDeSenhaPedidoService geradoSenhaService;
+
     public PedidoResponseDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
         PedidoPersistence pedidoPersistence = new PedidoPersistence();
-        pedidoPersistence.setSenha("A7-002");
+        pedidoPersistence.setSenha(geradoSenhaService.gerarNovaSenha());
 
         PagamentoPersistence pagamentoPersistence = new PagamentoPersistence();
         BigDecimal valorFinal = BigDecimal.ZERO;
+
+        if(pedidoRequestDTO.itens().isEmpty()) throw new CampoObrigatorioNuloException("Lista Item de Pedidos");
+
         for (ItemPedidoRequestDTO item : pedidoRequestDTO.itens()){
-            CafePersistence cafePersistence = cafeRepository.findById(item.idCafe()).get();
+            CafePersistence cafePersistence = cafeRepository.findById(item.idCafe())
+                .orElseThrow(() -> new ProdutoNaoEncontradoException("O café de ID " + item.idCafe() + " não foi encontrado no catálogo."));
+            
+            if(item.quantidade() <= 0) throw new CampoObrigatorioNuloException("Quantidade");
 
             ItemPedidoPersistence itemPedidoPersistence = itemPedidoMapper.toEntity(item, cafePersistence);
-
             itemPedidoPersistence.setPedido(pedidoPersistence);
-            itemPedidoPersistence.setQuantidade(item.quantidade());
-            pedidoPersistence.getItens().add(itemPedidoPersistence);
-
             itemPedidoPersistence.valorTotalItemPedido();
+
+            pedidoPersistence.getItens().add(itemPedidoPersistence);
 
             valorFinal = valorFinal.add(itemPedidoPersistence.getValorTotalItem());
         }
+
         pagamentoPersistence.setValorTotal(valorFinal);
         pedidoPersistence.setPagamento(pagamentoPersistence);
         pagamentoPersistence.setPedido(pedidoPersistence);
@@ -71,7 +86,9 @@ public class PedidoService {
             itensComprados.add(itemPedidoMapper.toResponseDTO(item, cafeResponseDTO));
         }
 
-        PedidoResponseDTO pedidoResponseDTO = pedidoMapper.toResponseDTO(pedidoPersistence, itensComprados);
+        PagamentoResponseDTO pagamentoResponseDTO = pagamentoMapper.toResponseDTO(pagamentoPersistence);
+
+        PedidoResponseDTO pedidoResponseDTO = pedidoMapper.toResponseDTO(pedidoPersistence, pagamentoResponseDTO, itensComprados);
         return pedidoResponseDTO;
     }
 }

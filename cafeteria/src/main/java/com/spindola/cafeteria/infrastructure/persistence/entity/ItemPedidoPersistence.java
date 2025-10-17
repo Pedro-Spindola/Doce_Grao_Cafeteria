@@ -37,9 +37,9 @@ public class ItemPedidoPersistence {
     }
 
     public void valorTotalItemPedido(){
-        valorTotalItem = BigDecimal.ZERO;
-        valorTotalItem.add(cafePedido.getValor());
-        valorTotalItem.multiply(BigDecimal.valueOf(quantidade));
+        BigDecimal valorUnitario = cafePedido.getValor();
+        BigDecimal quantidadeBD = BigDecimal.valueOf(quantidade);
+        valorTotalItem = valorUnitario.multiply(quantidadeBD);
     }
 
     public Long getId() {

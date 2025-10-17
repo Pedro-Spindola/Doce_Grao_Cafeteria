@@ -20,7 +20,7 @@ public class FabricaDeCafe {
         return instancia;
     }
 
-    public IProduto criarCafe(String nome, BigDecimal valor){
-        return new CafeModel(nome, valor);
+    public IProduto criarCafe(String nome, String descricao, BigDecimal valor){
+        return new CafeModel(nome, descricao, valor);
     }
 }
