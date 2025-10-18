@@ -1,0 +1,31 @@
+@use '../../styles/cor_modelo.scss' as *;
+$menu-width: 300px;
+
+.home-layout {
+  width: 100%; 
+  height: 100vh;
+  max-height: 100vh;
+  padding: 40px;
+  background-color: $cor-background;
+}
+
+app-menu {
+  display: block;
+  width: $menu-width;
+  height: 100%;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.content-area {
+  margin-left: $menu-width; 
+  width: auto;
+  height: 100%;
+  overflow-y: auto; 
+  
+  app-container {
+    display: block;
+  }
+}
