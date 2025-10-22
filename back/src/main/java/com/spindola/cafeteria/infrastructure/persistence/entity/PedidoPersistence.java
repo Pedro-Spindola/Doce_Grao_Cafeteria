@@ -3,6 +3,8 @@ package com.spindola.cafeteria.infrastructure.persistence.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.spindola.cafeteria.domain.model.enums.StatusPedido;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +28,8 @@ public class PedidoPersistence {
     private PagamentoPersistence pagamento;
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedidoPersistence> itens;
+    @Column(nullable = false)
+    private StatusPedido statusPedido;
 
     public PedidoPersistence() {
         this.itens = new ArrayList<>();
@@ -61,5 +65,13 @@ public class PedidoPersistence {
 
     public void setItens(List<ItemPedidoPersistence> itens) {
         this.itens = itens;
+    }
+
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+    
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
     }
 }

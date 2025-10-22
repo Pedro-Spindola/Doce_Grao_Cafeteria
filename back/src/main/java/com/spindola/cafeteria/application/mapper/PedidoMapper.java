@@ -20,6 +20,7 @@ public class PedidoMapper {
     public PedidoResponseDTO toResponseDTO(PedidoPersistence pedidoPersistence, PagamentoResponseDTO pagamentoResponseDTO, List<ItemPedidoResponseDTO> itemPedidoResponseDTO){
         return new PedidoResponseDTO(
             pedidoPersistence.getSenha(),
+            pedidoPersistence.getStatusPedido(),
             pagamentoResponseDTO,
             itemPedidoResponseDTO
         );

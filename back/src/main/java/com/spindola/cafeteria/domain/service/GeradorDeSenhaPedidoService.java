@@ -13,6 +13,8 @@ public class GeradorDeSenhaPedidoService {
     public String gerarNovaSenha() {
         LocalDate hoje = LocalDate.now();
 
+        if(dataLocal == null) dataLocal = LocalDate.now();
+
         if (dataLocal.isBefore(hoje)) senhaAtual = 1;
         senhaAtual++;
         String numeroFormatado = String.format("%04d", senhaAtual); 

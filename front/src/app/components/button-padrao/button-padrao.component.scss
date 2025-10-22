@@ -1,0 +1,18 @@
+@use '../../styles/cor_modelo.scss' as *;
+
+button {
+  width: 160px;
+  height: 40px;
+  background-color: $cor-primaria;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background-color .2s ease, color .2s ease;
+}
+
+button:hover {
+  background-color: $cor-secundaria;
+  color: white;
+}

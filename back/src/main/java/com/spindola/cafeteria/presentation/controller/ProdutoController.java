@@ -19,7 +19,7 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
 
-    @GetMapping(value = "/cafe")
+    @GetMapping(value = "/cafes")
     public List<CafeResponseDTO> buscarTodosCafes(){
         return this.service.buscarTodosCafes();
     }

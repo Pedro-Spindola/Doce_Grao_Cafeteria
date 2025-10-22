@@ -11,7 +11,9 @@ public class PagamentoMapper {
     public PagamentoResponseDTO toResponseDTO(PagamentoPersistence pagamentoPersistence){
         PagamentoResponseDTO pagamentoResponseDTO = new PagamentoResponseDTO(
             pagamentoPersistence.getId(),
-            pagamentoPersistence.getValorTotal()
+            pagamentoPersistence.getValorTotal(),
+            pagamentoPersistence.getStatusPagamento(),
+            pagamentoPersistence.getTipoPagamento()
         );
         return pagamentoResponseDTO;
     }

@@ -2,6 +2,9 @@ package com.spindola.cafeteria.infrastructure.persistence.entity;
 
 import java.math.BigDecimal;
 
+import com.spindola.cafeteria.domain.model.enums.StatusPagamento;
+import com.spindola.cafeteria.domain.model.enums.TipoPagamento;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +23,12 @@ public class PagamentoPersistence {
     
     @Column(nullable = false, precision = 19, scale = 2)
     private BigDecimal valorTotal;
+
+    @Column(nullable = false)
+    private StatusPagamento statusPagamento;
+
+    @Column
+    private TipoPagamento tipoPagamento;
 
     @OneToOne
     @JoinColumn(name = "pedido_id", unique = true, nullable = false)
@@ -51,5 +60,21 @@ public class PagamentoPersistence {
 
     public void setPedido(PedidoPersistence pedido) {
         this.pedido = pedido;
+    }
+
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
+    }
+    
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
+    }
+
+    public TipoPagamento getTipoPagamento() {
+        return tipoPagamento;
+    }
+    
+    public void setTipoPagamento(TipoPagamento tipoPagamento) {
+        this.tipoPagamento = tipoPagamento;
     }
 }

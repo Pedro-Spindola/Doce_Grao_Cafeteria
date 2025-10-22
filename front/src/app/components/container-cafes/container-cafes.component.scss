@@ -1,0 +1,11 @@
+.topico{
+    font-size: 28px;
+    padding-bottom: 20px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+    gap: 20px;
+}

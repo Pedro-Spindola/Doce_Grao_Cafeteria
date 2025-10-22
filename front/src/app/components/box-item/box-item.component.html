@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="line line-1">
+        <div class="box-coluna-1">
+            <span class="box-img"><img src="{{urlImagem}}" alt=""></span>
+        </div>
+        <div class="box-coluna-2">
+            <h3>{{cafe.nome}}</h3>
+            <div class="box-descricao">
+                 <p>{{cafe.descrica}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="line line-2">
+        <div class="box-coluna-1">
+            <h3>{{ cafe.valor | currency: 'BRL' }}</h3>
+        </div>
+        <div class="box-coluna-2">
+            <!---
+            <div class="tamanho-opcoes">
+                <label class="tamanho">
+                    <input type="radio" name="tamanho" value="P">
+                    <span>P</span>
+                </label>
+                <label class="tamanho">
+                    <input type="radio" name="tamanho" value="M">
+                    <span>M</span>
+                </label>
+                <label class="tamanho">
+                    <input type="radio" name="tamanho" value="G">
+                    <span>G</span>
+                </label>
+            </div>
+            -->
+        </div>
+    </div>
+    <div class="line line-3">
+        <div class="box-coluna-1">
+            <div class="container-quantidade">
+                <button class="btn-quantidade" (click)="btn_diminuir()">-</button>
+                <h4>{{quantidade}}</h4>
+                <button class="btn-quantidade" (click)="btn_aumentar()">+</button>
+            </div>
+        </div>
+        <div class="box-coluna-2">
+            <div class="container-btn-adicionar">
+                <app-button-padrao [nome]="'Adicionar'"></app-button-padrao>
+            </div>
+        </div>
+    </div>
+</div>

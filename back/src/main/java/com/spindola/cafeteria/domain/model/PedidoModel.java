@@ -2,11 +2,14 @@ package com.spindola.cafeteria.domain.model;
 
 import java.util.List;
 
+import com.spindola.cafeteria.domain.model.enums.StatusPedido;
+
 public class PedidoModel {
     private Long id;
     private String senha;
     private PagamentoModel pagamento;
     private List<ItemPedidoModel> itens;
+    private StatusPedido statusPedido;
 
     public PedidoModel() {
     }
@@ -35,4 +38,11 @@ public class PedidoModel {
     public void setItens(List<ItemPedidoModel> itens) {
         this.itens = itens;
     }
+    public StatusPedido getStatusPedido() {
+        return statusPedido;
+    }
+    public void setStatusPedido(StatusPedido statusPedido) {
+        this.statusPedido = statusPedido;
+    }
+    
 }

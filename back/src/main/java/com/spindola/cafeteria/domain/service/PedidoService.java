@@ -13,6 +13,8 @@ import com.spindola.cafeteria.application.mapper.PagamentoMapper;
 import com.spindola.cafeteria.application.mapper.PedidoMapper;
 import com.spindola.cafeteria.domain.exceptions.CampoObrigatorioNuloException;
 import com.spindola.cafeteria.domain.exceptions.ProdutoNaoEncontradoException;
+import com.spindola.cafeteria.domain.model.enums.StatusPagamento;
+import com.spindola.cafeteria.domain.model.enums.StatusPedido;
 import com.spindola.cafeteria.infrastructure.persistence.entity.CafePersistence;
 import com.spindola.cafeteria.infrastructure.persistence.entity.ItemPedidoPersistence;
 import com.spindola.cafeteria.infrastructure.persistence.entity.PagamentoPersistence;
@@ -22,7 +24,9 @@ import com.spindola.cafeteria.infrastructure.persistence.repository.PedidoReposi
 import com.spindola.cafeteria.presentation.dto.CafeResponseDTO;
 import com.spindola.cafeteria.presentation.dto.ItemPedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.ItemPedidoResponseDTO;
+import com.spindola.cafeteria.presentation.dto.PagamentoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PagamentoResponseDTO;
+import com.spindola.cafeteria.presentation.dto.PedidoIdDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoResponseDTO;
 
@@ -50,7 +54,7 @@ public class PedidoService {
     @Autowired
     GeradorDeSenhaPedidoService geradoSenhaService;
 
-    public PedidoResponseDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
+    public PedidoIdDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
         PedidoPersistence pedidoPersistence = new PedidoPersistence();
         pedidoPersistence.setSenha(geradoSenhaService.gerarNovaSenha());
 
@@ -75,9 +79,29 @@ public class PedidoService {
         }
 
         pagamentoPersistence.setValorTotal(valorFinal);
-        pedidoPersistence.setPagamento(pagamentoPersistence);
         pagamentoPersistence.setPedido(pedidoPersistence);
+        pagamentoPersistence.setStatusPagamento(StatusPagamento.PENDENTE);
+        pagamentoPersistence.setTipoPagamento(null);
+
+        pedidoPersistence.setPagamento(pagamentoPersistence);
+        pedidoPersistence.setStatusPedido(StatusPedido.AGUARDANDO_PAGAMENTO);
         
+        PedidoPersistence pedidoPersistenceFinal = pedidoRepository.save(pedidoPersistence); // SALVANDO O MEU PEDIDO NO BANCO DE DADOS.
+
+        return new PedidoIdDTO(pedidoPersistenceFinal.getId());
+    }
+
+    public PedidoResponseDTO aprovarPagamento(PagamentoRequestDTO pag){
+        PedidoPersistence pedidoPersistence = pedidoRepository.findById(pag.id_Pedido())
+            .orElseThrow(() -> new ProdutoNaoEncontradoException("Id "+ pag.id_Pedido() + " não foi encontrado no banco de dados."));
+
+        PagamentoPersistence pagamentoPersistenceAtualizado = pedidoPersistence.getPagamento();
+        pagamentoPersistenceAtualizado.setTipoPagamento(pag.tipoPagamento());
+        pagamentoPersistenceAtualizado.setStatusPagamento(StatusPagamento.CONCLUIDO);
+
+        pedidoPersistence.setPagamento(pagamentoPersistenceAtualizado);
+        pedidoPersistence.setStatusPedido(StatusPedido.PAGO);
+
         pedidoRepository.save(pedidoPersistence);
 
         List<ItemPedidoResponseDTO> itensComprados = new ArrayList<>();
@@ -86,9 +110,9 @@ public class PedidoService {
             itensComprados.add(itemPedidoMapper.toResponseDTO(item, cafeResponseDTO));
         }
 
-        PagamentoResponseDTO pagamentoResponseDTO = pagamentoMapper.toResponseDTO(pagamentoPersistence);
-
+        PagamentoResponseDTO pagamentoResponseDTO = pagamentoMapper.toResponseDTO(pagamentoPersistenceAtualizado);
         PedidoResponseDTO pedidoResponseDTO = pedidoMapper.toResponseDTO(pedidoPersistence, pagamentoResponseDTO, itensComprados);
+
         return pedidoResponseDTO;
     }
 }
