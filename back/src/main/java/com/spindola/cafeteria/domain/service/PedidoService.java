@@ -26,7 +26,7 @@ import com.spindola.cafeteria.presentation.dto.ItemPedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.ItemPedidoResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PagamentoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PagamentoResponseDTO;
-import com.spindola.cafeteria.presentation.dto.PedidoIdDTO;
+import com.spindola.cafeteria.presentation.dto.PedidoIdResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoResponseDTO;
 
@@ -54,7 +54,7 @@ public class PedidoService {
     @Autowired
     GeradorDeSenhaPedidoService geradoSenhaService;
 
-    public PedidoIdDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
+    public PedidoIdResponseDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
         PedidoPersistence pedidoPersistence = new PedidoPersistence();
         pedidoPersistence.setSenha(geradoSenhaService.gerarNovaSenha());
 
@@ -86,9 +86,11 @@ public class PedidoService {
         pedidoPersistence.setPagamento(pagamentoPersistence);
         pedidoPersistence.setStatusPedido(StatusPedido.AGUARDANDO_PAGAMENTO);
         
-        PedidoPersistence pedidoPersistenceFinal = pedidoRepository.save(pedidoPersistence); // SALVANDO O MEU PEDIDO NO BANCO DE DADOS.
+        PedidoPersistence pedidoPersistenceFinal = pedidoRepository.save(pedidoPersistence);
 
-        return new PedidoIdDTO(pedidoPersistenceFinal.getId());
+        PedidoIdResponseDTO pedidoId = new PedidoIdResponseDTO(pedidoPersistenceFinal.getId());
+
+        return pedidoId;
     }
 
     public PedidoResponseDTO aprovarPagamento(PagamentoRequestDTO pag){

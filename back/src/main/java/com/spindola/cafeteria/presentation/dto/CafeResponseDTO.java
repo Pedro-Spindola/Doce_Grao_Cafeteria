@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 public record CafeResponseDTO(
     Long id,
     String nome,
-    String descrica,
+    String descricao,
     BigDecimal valor
 ) {}

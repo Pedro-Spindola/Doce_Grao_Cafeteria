@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Cafes, ProdutosService } from '../../services/produtos.service';
+import { ProdutosService } from '../../services/produtos.service';
 import { BoxItemComponent } from "../box-item/box-item.component";
 import { CommonModule } from '@angular/common';
+import { CafeResponse } from '../../models/CafeResponse';
 
 @Component({
   selector: 'app-container-cafes',
@@ -10,14 +11,14 @@ import { CommonModule } from '@angular/common';
   styleUrl: './container-cafes.component.scss'
 })
 export class ContainerCafesComponent implements OnInit {
-  cafes: Cafes[] = [];
-
+  cafes: CafeResponse[] = [];
   constructor(private produtosService: ProdutosService){}
 
   ngOnInit(): void {
       this.produtosService.findAll().subscribe({
       next: (dadosDaApi) => {
         this.cafes = dadosDaApi;
+        this.produtosService.adicionarListaCafe(dadosDaApi);
         console.log('Cafés carregados com sucesso:', this.cafes);
       },
       error: (erro) => {

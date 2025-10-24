@@ -1,7 +1,6 @@
 package com.spindola.cafeteria.presentation.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spindola.cafeteria.domain.service.PedidoService;
 import com.spindola.cafeteria.presentation.dto.PagamentoRequestDTO;
-import com.spindola.cafeteria.presentation.dto.PedidoIdDTO;
+import com.spindola.cafeteria.presentation.dto.PedidoIdResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoResponseDTO;   
 
@@ -21,7 +20,7 @@ public class PedidoController {
     PedidoService pedidoService;
 
     @PostMapping
-    public PedidoIdDTO fazerNovoPedido(@RequestBody PedidoRequestDTO pedidoRequestDTO){
+    public PedidoIdResponseDTO fazerNovoPedido(@RequestBody PedidoRequestDTO pedidoRequestDTO){
         return pedidoService.novoPedido(pedidoRequestDTO);
     }
 

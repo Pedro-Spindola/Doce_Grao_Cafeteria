@@ -1,0 +1,55 @@
+<div class="finalizado-container">
+    <div class="card-confirmação">
+        
+        <div class="header-sucesso">
+            <i class="icon-check">✔</i>
+            <h2>PEDIDO REALIZADO COM SUCESSO!</h2>
+            <p>Seu pedido está sendo preparado. Apresente o número abaixo para retirada.</p>
+        </div>
+
+        <div class="box-senha">
+            <p class="label-senha">SENHA DE RETIRADA:</p>
+            <span class="senha">{{ pedido!.senhaRetirada }}</span>
+        </div>
+        
+        <div class="resumo-detalhes">
+            <h3>Detalhes do Pedido</h3>
+            
+            <div class="info-row status">
+                <span>Status Atual:</span>
+                <span class="valor-status">{{ pedido!.statusPedido }}</span> 
+                </div>
+
+            <div class="divider"></div>
+
+            <div class="itens-list">
+                <h4>Itens:</h4>
+                <div class="item-row" *ngFor="let item of pedido!.itensComprados">
+                    <span class="item-nome">{{ item.quantidade }}x {{ item.cafe.nome }}</span>
+                    <span class="item-valor">{{ item.valorTotalItem | currency:'BRL':'symbol':'1.2-2' }}</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="info-row pagamento">
+                <span>Total Pago:</span>
+                <span class="valor-total">{{ pedido!.pagamento!.valor| currency:'BRL':'symbol':'1.2-2' }}</span>
+            </div>
+            
+            <div class="info-row pagamento-tipo">
+                <span>Método:</span>
+                <span class="valor-metodo">{{ pedido!.pagamento!.tipoPagamento }}</span>
+            </div>
+
+        </div>
+        
+        <div class="acoes">
+            <button class="btn-novo-pedido" (click)="voltarTelaInicial()">FAZER NOVO PEDIDO</button>
+        </div>
+    </div>
+    
+    <div *ngIf="!pedido" class="fallback-message">
+        <p>Aguardando confirmação do pedido...</p>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+@use '../../styles/cor_modelo.scss' as *;
+
+.finalizado-container {
+    background-color: $cor-background;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; // Começa no topo
+    padding: 40px 20px;
+}
+
+.card-confirmação {
+    width: 100%;
+    max-width: 500px;
+    background-color: $cor-white;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba($cor-secundaria, 0.2);
+    padding: 30px;
+    text-align: center;
+}
+
+.header-sucesso {
+    margin-bottom: 25px;
+    
+    .icon-check {
+        font-size: 3rem;
+        color: $cor-primaria;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        color: $cor-secundaria;
+        font-size: 1.6rem;
+        margin-bottom: 5px;
+    }
+
+    p {
+        color: #666;
+        font-size: 0.9rem;
+    }
+}
+
+.box-senha {
+    background-color: $cor-menu;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 25px;
+    border: 1px dashed $cor-primaria;
+
+    .label-senha {
+        margin: 0;
+        font-size: 0.9rem;
+        color: $cor-secundaria;
+        font-weight: 500;
+    }
+
+    .senha {
+        display: block;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: $cor-primaria;
+        letter-spacing: 2px;
+        margin-top: 5px;
+    }
+}
+
+.resumo-detalhes {
+    text-align: left;
+    margin-bottom: 30px;
+
+    h3, h4 {
+        color: $cor-secundaria;
+        border-bottom: 1px solid $cor-menu;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 1rem;
+    color: #444;
+
+    &.status .valor-status {
+        font-weight: bold;
+        color: green; /* Destaque para o status */
+    }
+    
+    &.pagamento .valor-total {
+        font-weight: bold;
+        color: $cor-secundaria;
+    }
+}
+
+.itens-list {
+    .item-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.95rem;
+        padding: 3px 0;
+        
+        .item-nome {
+            color: #555;
+        }
+
+        .item-valor {
+            font-weight: 500;
+            color: #333;
+        }
+    }
+}
+
+.divider {
+    border-top: 1px solid $cor-menu;
+    margin: 10px 0;
+}
+
+.acoes {
+    .btn-novo-pedido {
+        background-color: $cor-primaria;
+        color: $cor-white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($cor-primaria, 10%);
+        }
+    }
+}
+
+.fallback-message {
+    text-align: center;
+    margin-top: 20px;
+    color: #999;
+}

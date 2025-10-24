@@ -1,1 +1,26 @@
-<p>pedido works!</p>
+<div class="main">
+  <div class="pedido-container">
+    <h1 class="titulo">CONFIRMAÇÃO DO PEDIDO</h1>
+
+    <div class="divider"></div>
+
+    <div class="itens-list" *ngIf="itensPedidoExibicao$ | async as itens">
+      <div class="item" *ngFor="let item of itens">
+        <span class="nome-cafe">{{ item.nomeCafe }}</span>
+        <span class="quantidade">({{ item.quantidade }}x)</span>
+        <span class="preco-item">{{ item.subTotal | currency:'BRL':'symbol':'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="total-area" *ngIf="totalPedido$ | async as total">
+      <span class="label-total">TOTAL</span>
+      <span class="valor-total">{{ total | currency:'BRL':'symbol':'1.2-2' }}</span>
+    </div>
+
+    <div class="button-area">
+      <button (click)="fazerPedido()">Fazer Pedido</button>
+    </div>
+  </div>
+</div>
