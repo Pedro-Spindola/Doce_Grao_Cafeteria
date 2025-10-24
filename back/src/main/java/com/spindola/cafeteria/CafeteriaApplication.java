@@ -19,7 +19,9 @@ public class CafeteriaApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200") // Angular
+                        .allowedOrigins(
+                            "http://192.168.1.157:4200",
+                            "http://localhost:4200")
                         .allowedMethods("GET","POST","PUT","DELETE","OPTIONS")
                         .allowedHeaders("*");
             }

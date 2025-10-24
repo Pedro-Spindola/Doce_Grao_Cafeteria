@@ -26,9 +26,10 @@ import com.spindola.cafeteria.presentation.dto.ItemPedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.ItemPedidoResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PagamentoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PagamentoResponseDTO;
-import com.spindola.cafeteria.presentation.dto.PedidoIdDTO;
+import com.spindola.cafeteria.presentation.dto.PedidoIdResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoResponseDTO;
+import com.spindola.cafeteria.presentation.dto.PedidoSimplesResponseDTO;
 
 @Service
 public class PedidoService {
@@ -54,7 +55,7 @@ public class PedidoService {
     @Autowired
     GeradorDeSenhaPedidoService geradoSenhaService;
 
-    public PedidoIdDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
+    public PedidoIdResponseDTO novoPedido(PedidoRequestDTO pedidoRequestDTO){
         PedidoPersistence pedidoPersistence = new PedidoPersistence();
         pedidoPersistence.setSenha(geradoSenhaService.gerarNovaSenha());
 
@@ -86,9 +87,11 @@ public class PedidoService {
         pedidoPersistence.setPagamento(pagamentoPersistence);
         pedidoPersistence.setStatusPedido(StatusPedido.AGUARDANDO_PAGAMENTO);
         
-        PedidoPersistence pedidoPersistenceFinal = pedidoRepository.save(pedidoPersistence); // SALVANDO O MEU PEDIDO NO BANCO DE DADOS.
+        PedidoPersistence pedidoPersistenceFinal = pedidoRepository.save(pedidoPersistence);
 
-        return new PedidoIdDTO(pedidoPersistenceFinal.getId());
+        PedidoIdResponseDTO pedidoId = new PedidoIdResponseDTO(pedidoPersistenceFinal.getId());
+
+        return pedidoId;
     }
 
     public PedidoResponseDTO aprovarPagamento(PagamentoRequestDTO pag){
@@ -114,5 +117,28 @@ public class PedidoService {
         PedidoResponseDTO pedidoResponseDTO = pedidoMapper.toResponseDTO(pedidoPersistence, pagamentoResponseDTO, itensComprados);
 
         return pedidoResponseDTO;
+    }
+
+    public List<PedidoSimplesResponseDTO> listarPedidosPagos(){
+        return pedidoRepository.findByStatusPedido(StatusPedido.PAGO).stream()
+                .map(pedidoMapper::toResponseSimplesDTO)
+                .toList();
+    }
+
+    public List<PedidoSimplesResponseDTO> listarPedidosPronto(){
+        return pedidoRepository.findByStatusPedido(StatusPedido.PRONTO).stream()
+                .map(pedidoMapper::toResponseSimplesDTO)
+                .toList();
+    }
+
+    public Boolean seguirStatus(Long idPedido){
+        PedidoPersistence pedidoPersistence = pedidoRepository.findById(idPedido)
+            .orElseThrow(() -> new ProdutoNaoEncontradoException("Id "+ idPedido + " não foi encontrado no banco de dados."));
+        
+        if(pedidoPersistence.getStatusPedido() == StatusPedido.PAGO) pedidoPersistence.setStatusPedido(StatusPedido.PRONTO);
+        else if(pedidoPersistence.getStatusPedido() == StatusPedido.PRONTO) pedidoPersistence.setStatusPedido(StatusPedido.FINALIZADO);
+
+        pedidoRepository.save(pedidoPersistence);
+        return true;
     }
 }

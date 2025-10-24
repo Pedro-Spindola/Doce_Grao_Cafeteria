@@ -1,6 +1,6 @@
 <h1 class="topico">CAFES</h1>
 <div class="container">
-    <app-box-item *ngFor="let cafe of cafes" [cafe]="cafe"></app-box-item>
+    <app-box-item *ngFor="let cafe of cafes" [cafeParaBox]="cafe"></app-box-item>
     
     <div *ngIf="cafes.length === 0">
         Nenhum café encontrado no momento. 😔

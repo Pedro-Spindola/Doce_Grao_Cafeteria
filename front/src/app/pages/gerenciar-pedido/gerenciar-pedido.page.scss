@@ -1,0 +1,118 @@
+@use '../../styles/cor_modelo.scss' as *;
+
+.gerenciar-pedido {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $cor-background;
+
+  .gp-header {
+    height: 80px;
+    width: 100%;
+    background-color: $cor-menu;
+    color: $cor-secundaria;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .header-inner {
+      position: relative;
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+    }
+
+    .logo {
+      position: absolute;
+      left: 16px;
+      height: 70px;
+      width: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0;
+      text-align: center;
+    }
+  }
+
+  .gp-conteudo {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+
+    .tabelas {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 1100px;
+
+      .tabela-bloco {
+        flex: 1 1 45%;
+        background: $cor-white;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        padding: 16px;
+
+        h2 {
+          color: $cor-secundaria;
+          text-align: center;
+          margin-bottom: 16px;
+          font-size: 20px;
+        }
+
+        .gp-tabela {
+          width: 100%;
+          border-collapse: collapse;
+
+          th {
+            background-color: $cor-secundaria;
+            color: $cor-white;
+            padding: 12px;
+            text-align: left;
+            font-size: 16px;
+          }
+
+          th:nth-child(2){
+            text-align: center;
+            width: 120px;
+          }
+
+          td {
+            padding: 12px;
+            border-bottom: 1px solid $cor-menu;
+            font-size: 15px;
+          }
+
+          tr:nth-child(even) {
+            background-color: $cor-background
+          }
+        }
+      }
+    }
+
+    .btn-acao {
+      background-color: $cor-primaria;
+      color: $cor-white;
+      border: none;
+      width: 100px;
+      height: 28px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color .5s ease;
+
+      &:hover {
+        background-color: $cor-secundaria;
+      }
+    }
+  }
+}

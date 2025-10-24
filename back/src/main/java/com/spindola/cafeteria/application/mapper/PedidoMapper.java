@@ -10,6 +10,7 @@ import com.spindola.cafeteria.presentation.dto.ItemPedidoResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PagamentoResponseDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoRequestDTO;
 import com.spindola.cafeteria.presentation.dto.PedidoResponseDTO;
+import com.spindola.cafeteria.presentation.dto.PedidoSimplesResponseDTO;
 
 @Component
 public class PedidoMapper {
@@ -25,6 +26,13 @@ public class PedidoMapper {
             itemPedidoResponseDTO
         );
     }
+
+     public PedidoSimplesResponseDTO toResponseSimplesDTO(PedidoPersistence pedidoPersistence){
+        return new PedidoSimplesResponseDTO(
+            pedidoPersistence.getId(),
+            pedidoPersistence.getSenha()
+        );
+     }
 
     public PedidoPersistence toEntity(PedidoRequestDTO dto){
         return null;

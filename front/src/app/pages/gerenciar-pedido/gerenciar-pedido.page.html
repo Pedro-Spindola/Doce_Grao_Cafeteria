@@ -1,0 +1,52 @@
+<div class="gerenciar-pedido">
+  <!-- Cabeçalho -->
+  <header class="gp-header">
+    <div class="header-inner">
+      <img class="logo" src="logo.jpg" alt="Logo" />
+      <h1>Gerenciar Pedido</h1>
+    </div>
+  </header>
+
+  <!-- Conteúdo -->
+  <section class="gp-conteudo">
+    <div class="tabelas">
+      <!-- Pedidos Pagos (em preparo) -->
+      <div class="tabela-bloco">
+        <h2>Pedidos em Preparo</h2>
+        <table class="gp-tabela">
+          <thead>
+            <tr>
+              <th>Senha</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of pedidosPagos$ | async">
+              <td>{{ pedido.senha }}</td>
+              <td><button class="btn-acao" (click)="atualizarStatus(pedido)">Ação</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pedidos Prontos -->
+      <div class="tabela-bloco">
+        <h2>Pedidos Prontos para Retirada</h2>
+        <table class="gp-tabela">
+          <thead>
+            <tr>
+              <th>Senha</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let pedido of pedidosRetirada$ | async">
+              <td>{{ pedido.senha }}</td>
+              <td><button class="btn-acao" (click)="atualizarStatus(pedido)">Ação</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>

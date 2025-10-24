@@ -4,15 +4,15 @@
             <span class="box-img"><img src="{{urlImagem}}" alt=""></span>
         </div>
         <div class="box-coluna-2">
-            <h3>{{cafe.nome}}</h3>
+            <h3>{{cafeParaBox.nome}}</h3>
             <div class="box-descricao">
-                 <p>{{cafe.descrica}}</p>
+                 <p>{{cafeParaBox.descricao}}</p>
             </div>
         </div>
     </div>
     <div class="line line-2">
         <div class="box-coluna-1">
-            <h3>{{ cafe.valor | currency: 'BRL' }}</h3>
+            <h3>{{ cafeParaBox.valor| currency: 'BRL' }}</h3>
         </div>
         <div class="box-coluna-2">
             <!---
@@ -43,7 +43,7 @@
         </div>
         <div class="box-coluna-2">
             <div class="container-btn-adicionar">
-                <app-button-padrao [nome]="'Adicionar'"></app-button-padrao>
+                <app-button-padrao [nome]="'Adicionar'" (acao)="adicionar()"></app-button-padrao>
             </div>
         </div>
     </div>

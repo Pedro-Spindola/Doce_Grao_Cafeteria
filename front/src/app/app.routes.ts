@@ -3,6 +3,10 @@ import { HomePage } from './pages/home/home.page';
 import { PedidoPage } from './pages/pedido/pedido.page';
 import { ContainerCafesComponent } from './components/container-cafes/container-cafes.component';
 import { ContainerApresentacaoComponent } from './components/container-apresentacao/container-apresentacao.component';
+import { PagamentoPage } from './pages/pagamento/pagamento.page';
+import { FinalizadoPage } from './pages/finalizado/finalizado.page';
+import { PainelPedidosPage } from './pages/painel-pedidos/painel-pedidos.page';
+import { GerenciarPedidoComponent } from './pages/gerenciar-pedido/gerenciar-pedido.page';
 
 export const routes: Routes = [
   {
@@ -14,6 +18,10 @@ export const routes: Routes = [
     ]
   },
   { path: 'pedido', component: PedidoPage },
+  { path: 'pagamento', component: PagamentoPage },
+  { path: 'finalizado', component: FinalizadoPage},
+  { path: 'painel', component: PainelPedidosPage},
+  { path: 'gerenciador', component: GerenciarPedidoComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home' }
 ];

@@ -1,28 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-
-export interface Cafes {
-  id: number;
-  nome: string;
-  descrica: string;
-  valor: number;
-}
+import { CafeResponse } from '../models/CafeResponse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProdutosService {
-  private readonly apiUrl = "http://localhost:8080/api/v1/produto"
+  private readonly apiUrl = "http://192.168.1.157:8080/api/v1/produto"
+  private cafes: CafeResponse[] = [];
 
   constructor(private http: HttpClient) { }
 
-  findAll(): Observable<Cafes[]>{
-    return this.http.get<Cafes[]>(`${this.apiUrl}/cafes`).pipe(catchError(this.handleError));
+  findAll(): Observable<CafeResponse[]>{
+    return this.http.get<CafeResponse[]>(`${this.apiUrl}/cafes`).pipe(catchError(this.handleError));
   }
 
   private handleError(error: any){
     console.error('Erro na API: ', error);
     return throwError(() => new Error('Erro ao consultar a API de contatos.'))
+  }
+
+  obterCafes(): CafeResponse[] {
+    return this.cafes;
+  }
+
+  adicionarListaCafe(cafe: CafeResponse[]): void {
+    this.cafes = cafe;
   }
 }

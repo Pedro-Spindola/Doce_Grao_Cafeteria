@@ -1,5 +1,5 @@
 package com.spindola.cafeteria.presentation.dto;
 
-public record PedidoIdDTO(
+public record PedidoIdResponseDTO(
     Long id
 ) {}

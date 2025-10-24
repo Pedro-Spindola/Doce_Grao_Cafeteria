@@ -1,0 +1,13 @@
+<div class="tela-pagamento">
+    <div class="container-menu">
+        <div class="menu-1">
+            <h1>FORMA DE PAGAMENTO</h1>
+            <button class="btn" [class.btn-selecionado]="tipoEscolhido === TipoPagamento.PIX" (click)="EscolherMetodo(TipoPagamento.PIX)">PIX</button>
+            <button class="btn" [class.btn-selecionado]="tipoEscolhido === TipoPagamento.DEBITO" (click)="EscolherMetodo(TipoPagamento.DEBITO)">DÉBITO</button>
+            <button class="btn" [class.btn-selecionado]="tipoEscolhido === TipoPagamento.CREDITO" (click)="EscolherMetodo(TipoPagamento.CREDITO)">CRÉDITO</button>
+        </div>
+        <div class="menu-2">
+            <h1>SIMULAR PAGAMENTO</h1>
+        </div>
+    </div>
+</div>

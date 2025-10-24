@@ -1,0 +1,19 @@
+<div class="painel-pedidos">
+  <div class="coluna coluna-preparo">
+    <h2>Pedidos em Preparo</h2>
+    <div class="lista-pedidos">
+      <div class="pedido" *ngFor="let pedido of pedidosPagos$ | async">
+        <span class="pedido-senha"># {{ pedido.senha }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="coluna coluna-pronto">
+    <h2>Pedidos Prontos para Retirada</h2>
+    <div class="lista-pedidos">
+      <div class="pedido" *ngFor="let pedido of pedidosRetirada$ | async">
+        <span class="pedido-senha"># {{ pedido.senha }}</span>
+      </div>
+    </div>
+  </div>
+</div>
